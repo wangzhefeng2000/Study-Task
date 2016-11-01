@@ -31,7 +31,8 @@ namespace studyTask2
             DataContext = _viewModel;
         }
 
-        private CancellationTokenSource cts = new CancellationTokenSource();
+        private CancellationTokenSource cts;
+
         private void StartClick(object sender, RoutedEventArgs e)
         {
             StartTask();
@@ -46,15 +47,14 @@ namespace studyTask2
         {
             StartBtn.IsEnabled = false;
             EndBtn.IsEnabled = true;
-           
-            
 
-             var progress = new Progress<ViewModel>();
+           var progress = new Progress<ViewModel>();
             progress.ProgressChanged += (s, e) =>
             {
                 _viewModel.Step = e.Step ;
                 _viewModel.Message = e.Message;
             };
+            cts = new CancellationTokenSource();
             await MyTaskAsync(progress, cts);
 
             StartBtn.IsEnabled = true;
@@ -67,7 +67,7 @@ namespace studyTask2
             {
                 for (var i = 1; i <= 500 && !cts.IsCancellationRequested; i++)
                 {
-                    Thread.Sleep( i);
+                    Thread.Sleep(500 - i);
                     progress.Report(new ViewModel { Step = i / 5, Message = "Message " + i });
                 }
             });
@@ -78,6 +78,7 @@ namespace studyTask2
 
         private void EndTask()
         {
+            // 通过调用cancel来停止运行.
             cts.Cancel();
             MessageBox.Show("Canceled!");
         }
