@@ -16,7 +16,7 @@
             <Button  x:Name="StartBtn" Content="Start"  Width="72" Height="32" Margin="10,0" Click="StartClick"/>
             <Button  x:Name="EndBtn" Content="End"  Width="72" Height="32" Margin="10,0"  Click="EndClick" />
         </StackPanel>
-        <ProgressBar Grid.Row="1" Value="{Binding  Step}" Maximum="100" Minimum="0" />
+        <ProgressBar Grid.Row="1" Value="{Binding  Step}" Maximum="500" Minimum="0" />
         <TextBlock  Grid.Row="2" Text="{Binding Message}"  />   
     </Grid>
 </Window>

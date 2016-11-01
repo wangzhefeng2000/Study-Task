@@ -68,7 +68,7 @@ namespace studyTask2
                 for (var i = 1; i <= 500 && !cts.IsCancellationRequested; i++)
                 {
                     Thread.Sleep(500 - i);
-                    progress.Report(new ViewModel { Step = i / 5, Message = "Message " + i });
+                    progress.Report(new ViewModel { Step = i, Message = "Message " + i });
                 }
             });
 
